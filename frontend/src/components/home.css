@@ -109,3 +109,36 @@ section {
 .feature:hover .icon {
     color: var(--orange);
 }
+
+/* LET's Get Started */
+.box {
+    max-height: 25rem;
+    max-width: auto;
+}
+
+.box_animal {
+    max-width: auto;
+    max-height: 25rem;
+}
+
+#dogBox {
+    border: 2px solid var(--orange);
+}
+
+#dogBox:hover {
+    background: var(--orange);
+}
+
+#catBox {
+    border: 2px solid var(--blue);
+}
+
+#catBox:hover {
+    background: var(--blue);
+}
+
+.box:hover img {
+    filter: invert(8%) sepia(4%) saturate(2237%) hue-rotate(193deg) brightness(95%) contrast(85%);
+}
+
+/* LET's Get Started END */

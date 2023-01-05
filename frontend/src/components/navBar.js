@@ -4,6 +4,7 @@ import "bootstrap/js/src/collapse.js"; //required for collapse functionality to 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 function NavBar() {
     const [navbar, setNavbar] = useState(false);
 

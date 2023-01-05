@@ -1,0 +1,47 @@
+/*FOOTER*/
+
+footer {
+    background: #232429;
+    color: lightgray;
+    margin-top: 100px;
+}
+
+footer a {
+    color: lightgrey;
+    font-size: 14px;
+    transition-duration: 0.2s;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.copy {
+    font-size: 12px;
+    padding: 10px;
+    border-top: 1px solid #FFFFFF;
+}
+
+.footer-middle {
+    padding-top: 2em;
+    color: white;
+}
+
+/* footer social icons */
+
+ul.social-network {
+    list-style: none;
+    display: inline;
+    margin-left: 0 !important;
+    padding: 0;
+}
+
+ul.social-network li {
+    display: inline;
+    margin: 0 5px;
+}
+
+ul.social-network li a:hover {
+    color: white;
+}
