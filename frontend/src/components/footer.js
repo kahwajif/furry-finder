@@ -14,7 +14,7 @@ function Footer() {
                             <div className="footer-pad">
                                 <h4>Features</h4>
                                 <ul className="list-unstyled">
-                                    <li><a href="/">Find Your Pet</a></li>
+                                    <li><a href="#choose-animal">Find Your Pet</a></li>
                                     <li><a href="/">Pet Store Locator</a></li>
                                     <li><a href="/">Reverse Image Search</a></li>
                                     <li> <a href="/">Food Recommendations</a></li>

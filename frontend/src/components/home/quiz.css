@@ -1,0 +1,65 @@
+#choose-animal {
+    background-color: var(--dark);
+    color: white;
+}
+
+@media only screen and (max-width: 992px) {
+    #choose-animal h4 {
+        font-size: 20px !important;
+    }
+}
+
+#choose-animal img {
+    width: 100%;
+    max-width: 377px;
+    height: auto;
+}
+
+#choose-animal h4 {
+    visibility: hidden;
+    margin-bottom: 2rem !important;
+}
+
+.box {
+    max-height: 25rem;
+    max-width: auto;
+}
+
+.box_animal {
+    max-width: auto;
+    max-height: 25rem;
+}
+
+#dogBox {
+    border: 2px solid var(--orange);
+}
+
+#dogBox {
+    background: var(--orange);
+}
+
+.box-title {
+    visibility: visible !important;
+}
+
+#catBox {
+    border: 2px solid var(--blue);
+}
+
+#catBox {
+    background: var(--blue);
+}
+
+.box {
+    transition: transform .2s;
+    margin: 0 auto;
+}
+
+.box:hover {
+    transform: scale(1.1);
+    border: 2px solid rgba(255, 255, 255, 0.35) !important;
+}
+
+.box img {
+    filter: invert(8%) sepia(4%) saturate(2237%) hue-rotate(193deg) brightness(95%) contrast(85%) !important;
+}

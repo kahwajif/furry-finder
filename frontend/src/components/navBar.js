@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './navBar.css';
 import "bootstrap/js/src/collapse.js"; //required for collapse functionality to prevent mixing js scripts
 
@@ -7,7 +7,21 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
     const [navbar, setNavbar] = useState(false);
+    const [width, setWidth] = useState(window.innerWidth);
 
+    function handleWindowSizeChange() {
+        setWidth(window.innerWidth);
+    }
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
+
+    const isMobile = width <= 768;
+
+    //hide nav after scroll
     const hideNav = () => {
         let dropdown = document.getElementById('collapseExample')
         if (window.scrollY >= 60) {
@@ -19,11 +33,10 @@ function NavBar() {
             setNavbar(false);
         }
     }
-
     window.addEventListener('scroll', hideNav);
 
     return (
-        <nav className={`navbar ${navbar ? "scrolled" : ""} navbar-expand-lg navbar-dark bg-dark fixed-top`}>
+        <nav className={`navbar ${navbar && !isMobile ? "scrolled" : ""} navbar-expand-lg navbar-dark bg-dark fixed-top`}>
             <div className="d-flex flex-grow-1">
                 <span className="w-100 d-lg-none d-block"></span>
                 <a className="navbar-brand" href="/">
@@ -41,12 +54,12 @@ function NavBar() {
                         <a href="/" className="nav-link">Home</a>
                     </li>
                     <li className="nav-item">
-                        <a href="/" className="nav-link">About</a>
+                        <a href="#about" className="nav-link">About</a>
                     </li>
                     <li className="nav-item dropdown text-nowrap">
                         <a className="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Features <FontAwesomeIcon icon={faChevronDown} size="sm" data-toggle="collapse" /></a>
                         <div className="collapse dropdown-menu text-center" id="collapseExample">
-                            <a className="dropdown-item" href="/">Find Your Pet</a>
+                            <a className="dropdown-item" href="#choose-animal">Find Your Pet</a>
                             <a className="dropdown-item" href="/">Pet Store Locator</a>
                             <a className="dropdown-item" href="/">Reverse Image Search</a>
                             <a className="dropdown-item" href="/">Food Recommendations</a>
