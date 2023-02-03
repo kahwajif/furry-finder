@@ -1,0 +1,48 @@
+.card {
+    color: white;
+    background-color: var(--dark);
+    width: auto;
+    min-height: 25rem;
+}
+
+/* cat styling */
+.cat-style .card-title {
+    color: var(--blue)
+}
+
+.cat-style .btn-outline {
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid var(--blue);
+    background-color: transparent;
+    color: var(--blue);
+    transition: ease-in-out .15s;
+}
+
+.cat-style .btn-outline:hover {
+    background-color: var(--blue);
+    color: white;
+}
+
+/* dog styling */
+.dog-style .card-title {
+    color: var(--orange)
+}
+
+.dog-style .btn-outline {
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid var(--orange);
+    background-color: transparent;
+    color: var(--orange);
+    transition: ease-in-out .15s;
+}
+
+.dog-style .btn-outline:hover {
+    background-color: var(--orange);
+    color: white;
+}

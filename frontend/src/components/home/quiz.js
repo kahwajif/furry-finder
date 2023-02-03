@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import './quiz.css';
-
+import { Link } from "react-router-dom";
 function Quiz() {
+
+
     //add CSS to #choose-animal H4s
     const [boxDogTitle, setBoxDogTitle] = useState(false);
     const [boxCatTitle, setBoxCatTitle] = useState(false);
@@ -47,19 +49,21 @@ function Quiz() {
                 <div className="row">
                     <div className="col col-sm-12 col-xl-6 col-md-6">
                         <h4 className={`${boxDogTitle ? 'box-title' : ''} mt-3`} >Adopt a dog!</h4>
-                        <a href="/">
+
+                        <Link to={"/quiz/dog"}>
                             <div className="box" id="dogBox" onMouseOver={e => titleToggle(e)} onMouseLeave={e => titleToggle(e)}>
                                 <img className="box_animal" id="dog_silhouette" src="/dog_silhouette.png" alt="choose dog" />
                             </div>
-                        </a>
+                        </Link>
+
                     </div>
                     <div className="col col-sm-12 col-xl-6 col-md-6">
                         <h4 className={`${boxCatTitle ? 'box-title' : ''} mt-3`} >Adopt a cat!</h4>
-                        <a href="/">
+                        <Link to={"/quiz/cat"}>
                             <div className="box" id="catBox" onMouseOver={e => titleToggle(e)} onMouseLeave={e => titleToggle(e)}>
                                 <img className="box_animal" id="cat_silhouette" src="/cat_silhouette.png" alt="choose cat" />
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div >

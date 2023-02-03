@@ -3,7 +3,12 @@
 footer {
     background: #232429;
     color: lightgray;
-    margin-top: 50px;
+    margin-top: 50px !important;
+    margin-bottom: 0px;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 footer a {

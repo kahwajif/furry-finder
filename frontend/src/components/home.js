@@ -6,12 +6,12 @@ import Quiz from "./home/quiz";
 import Banner from "./home/banner";
 function Home() {
     return (
-        <div >
+        <div className="page">
             <Banner />
             <Features />
             <Quiz />
             <About />
-        </div >
+        </div>
     );
 }
 

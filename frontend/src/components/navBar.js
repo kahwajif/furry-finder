@@ -1,47 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './navBar.css';
 import "bootstrap/js/src/collapse.js"; //required for collapse functionality to prevent mixing js scripts
-
+import { Link, /*useLocation*/ } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
-    const [navbar, setNavbar] = useState(false);
-    const [width, setWidth] = useState(window.innerWidth);
+    // const location = useLocation();
+    // console.log(location.pathname + location.hash)
+    // if (location.pathname + location.hash === "/#about") {
 
-    function handleWindowSizeChange() {
-        setWidth(window.innerWidth);
-    }
-    useEffect(() => {
-        window.addEventListener('resize', handleWindowSizeChange);
-        return () => {
-            window.removeEventListener('resize', handleWindowSizeChange);
-        }
-    }, []);
-
-    const isMobile = width <= 768;
-
-    //hide nav after scroll
-    const hideNav = () => {
-        let dropdown = document.getElementById('collapseExample')
-        if (window.scrollY >= 60) {
-            setNavbar(true);
-            if (window.getComputedStyle(dropdown).display !== "none") {
-                dropdown.classList.toggle('show')
-            }
-        } else {
-            setNavbar(false);
-        }
-    }
-    window.addEventListener('scroll', hideNav);
+    // }
 
     return (
-        <nav className={`navbar ${navbar && !isMobile ? "scrolled" : ""} navbar-expand-lg navbar-dark bg-dark fixed-top`}>
+        <nav className={`navbar navbar-expand-lg navbar-dark bg-dark fixed-top`}>
             <div className="d-flex flex-grow-1">
                 <span className="w-100 d-lg-none d-block"></span>
-                <a className="navbar-brand" href="/">
-                    Pet-Finder.net
-                </a>
+                <Link to={"/"} className="navbar-brand">Pet-Finder.net</Link>
                 <div className="w-100 text-right">
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar7">
                         <span className="navbar-toggler-icon"></span>
@@ -54,24 +29,31 @@ function NavBar() {
                         <a href="/" className="nav-link">Home</a>
                     </li>
                     <li className="nav-item">
-                        <a href="#about" className="nav-link">About</a>
+                        <Link to={"/dog-breeds"} className="nav-link">Dog Breeds</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={"/cat-breeds"} className="nav-link">Cat Breeds</Link>
                     </li>
                     <li className="nav-item dropdown text-nowrap">
                         <a className="nav-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Features <FontAwesomeIcon icon={faChevronDown} size="sm" data-toggle="collapse" /></a>
                         <div className="collapse dropdown-menu text-center" id="collapseExample">
-                            <a className="dropdown-item" href="#choose-animal">Find Your Pet</a>
-                            <a className="dropdown-item" href="/">Pet Store Locator</a>
-                            <a className="dropdown-item" href="/">Reverse Image Search</a>
-                            <a className="dropdown-item" href="/">Food Recommendations</a>
+                            <a href="/#choose-animal" className="dropdown-item">Find Your Pet</a>
+                            <Link className="dropdown-item" to={"/"}>Pet Store Locator</Link>
+                            <Link className="dropdown-item" to={"/"}>Reverse Image Search</Link>
+                            <Link className="dropdown-item" to={"/"}>Food Recommendations</Link>
                         </div>
                     </li>
                     <li className="nav-item">
-                        <a href="/" className="nav-link">Contact</a>
+                        <a href="/#about" className="nav-link">About</a>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={"/contact"} className="nav-link">Contact</Link>
                     </li>
                 </ul>
             </div>
         </nav>
     );
+
 }
 
 export default NavBar;

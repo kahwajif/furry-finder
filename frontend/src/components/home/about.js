@@ -3,7 +3,7 @@ import './about.css';
 
 function About() {
     return (
-        < section className="d-flex align-items-center" id="about" >
+        <section className="d-flex align-items-center" id="about" >
             <div className="container">
                 <h2>
                     About
