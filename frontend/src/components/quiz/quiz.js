@@ -1,4 +1,4 @@
-import React, { useState, /*useLayoutEffect*/ } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { catQuestions } from "./questions";
 import { dogQuestions } from "./questions";
@@ -6,9 +6,6 @@ import './quiz.css'
 
 function Quiz() {
     // for some reason react displays the page in the middle of the screen
-    // useLayoutEffect(() => {
-    //     window.scrollTo(0, 0)
-    // });
     //quiz animal styling
     const dogStyling = useParams().animal === "dog" ? true : false;
 
@@ -19,11 +16,17 @@ function Quiz() {
     //quiz buttons
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [backBtnVisible, setbackBtnVisible] = useState(false);
+
     //range option value
     const [optionValue, setOptionValue] = useState(0);
+    const [optionImage, setOptionImage] = useState(questions[currentQuestion].options[0].image);
+
+    //handle next and back buttons
     const handleNextClick = () => {
 
         const nextQuestion = currentQuestion + 1;
+        setOptionImage(questions[nextQuestion].options[0].image)
+        setOptionValue(0)
         if (nextQuestion === 0) {
             setbackBtnVisible(false);
         } else {
@@ -32,14 +35,16 @@ function Quiz() {
         if (nextQuestion < questions.length) {
             setCurrentQuestion(nextQuestion);
         } else {
-            //setShowScore(true);
             //show results
         }
+
     };
 
     const handleBackClick = () => {
 
         const nextQuestion = currentQuestion - 1;
+        setOptionImage(questions[nextQuestion].options[0].image)
+        setOptionValue(0)
         if (nextQuestion === 0) {
             setbackBtnVisible(false);
         } else {
@@ -49,13 +54,12 @@ function Quiz() {
         if (nextQuestion > -1) {
             setCurrentQuestion(nextQuestion);
         } else {
-            //setShowScore(true);
             //show results
         }
+
     };
 
     const handleOptionClick = (e) => {
-        // console.log(e.currentTarget.previousSibling)
         const allElements = document.querySelectorAll('*');
         allElements.forEach((element) => {
             element.classList.remove('cat-title');
@@ -65,19 +69,13 @@ function Quiz() {
 
     const handleOptionChange = (e, optionText) => {
         let frontCard = document.getElementById("front");
-        let backCard = document.getElementById("back");
-        frontCard.classList.add("front");
-        //backCard.classList.add("back");
-        //backCard.style.display = "";
-
-
-
+        frontCard.classList.add("gelatine");
         setTimeout(() => {
-            frontCard.classList.remove("front");
-            //backCard.classList.remove("back");
-            //backCard.style.display = "none";
-
-        }, 700);
+            setOptionImage(questions[currentQuestion].options[e.target.value].image)
+        }, 500);
+        setTimeout(() => {
+            frontCard.classList.remove("gelatine");
+        }, 1000);
         setOptionValue(e.target.value);
     };
 
@@ -85,30 +83,21 @@ function Quiz() {
     var optionsArray = [];
     // create and style the options
     if (questions[currentQuestion].optionsType === "slider") {
-        console.log("current:", optionValue)
         let sliderLength = questions[currentQuestion].options.length - 1;
         let option = questions[currentQuestion].options[optionValue];
-        let nextOption = option;
-        if (parseInt(optionValue) + 1 < sliderLength) {
-            nextOption = questions[currentQuestion].options[parseInt(optionValue) + 1];
-        } else if (parseInt(optionValue) - 1 < sliderLength) {
-            nextOption = questions[currentQuestion].options[parseInt(optionValue) - 1];
-        }
+
 
         optionsArray =
             (
-                <div className="col mt-4 spacing">
+                <div className="col mt-4">
                     <div className="col-card">
-                        <h4 className="form-label mb-5">{option.text}</h4>
+                        <h4 className="form-label">{option.text}</h4>
                         <div className="card-side" id="front">
-                            <img id={option.text} className={`range-image ${dogStyling ? "dog-range-img" : "cat-range-img"}`} src={option.image} alt={option.alt} />
+                            <img id={option.text} className={`range-image ${dogStyling ? "dog-range-img" : "cat-range-img"}`} src={optionImage} alt={option.alt} />
                         </div>
-                        {/* <div className="card-side" id="back">
-                            <img id={nextOption.text} className={`range-image ${dogStyling ? "dog-range-img" : "cat-range-img"}`} src={nextOption.image} alt={nextOption.alt} />
-                        </div> */}
                     </div>
                     <br></br>
-                    <input type="range" className="custom-range mt-5" value={optionValue} min="0" max={sliderLength} id="customRange" onChange={e => handleOptionChange(e, option.text)}></input>
+                    <input type="range" className="custom-range" value={optionValue} min="0" max={sliderLength} id="customRange" onChange={e => handleOptionChange(e, option.text)}></input>
                 </div>
             );
 
