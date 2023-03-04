@@ -1,12 +1,12 @@
 export const catQuestions = [
     {
         title: 'Size', description: `Choose the size of your cat.`,
-        options: [{ image: "/cat-size-small.png", text: "Small", alt: "Small sized cat" }, { image: "/cat-size-medium.png", text: "Medium cat", alt: "Medium sized cat" }, { image: "/cat-size-large.png", text: "Large", alt: "Large sized cat" }, { image: "/question-mark-cat.PNG", text: "Open to any size", alt: "Open to any size cat", style: true }],
+        options: [{ image: "/cat-size-small.png", text: "SMALL", alt: "Small sized cat" }, { image: "/cat-size-medium.png", text: "MEDIUM", alt: "Medium sized cat" }, { image: "/cat-size-large.png", text: "LARGE", alt: "Large sized cat" }, { image: "/question-mark-cat.PNG", text: "ANY SIZE", alt: "Open to any size cat", style: true }],
         optionsType: "slider"
     },
     {
-        title: 'Coat Length', description: `Choose the size of your cat.`,
-        options: [{ image: "/Mocha.PNG", text: "Short Haired", alt: "Short haired cat" }, { image: "/Mocha.PNG", text: "Semi Long Haired", alt: "Semi long haired cat" }, { image: "/Mocha.PNG", text: "Long Haired", alt: "Long Haired cat" }, { image: "/Mocha.PNG", text: "Hairless Cat", alt: "Hairless cat" }, { image: "/question-mark-cat.PNG", text: "Open to any size", alt: "Open to any size cat", style: true }]
+        title: 'Coat Length', description: `Choose the coat length for your cat.`,
+        options: [{ image: "/short-haired.PNG", text: "SHORT HAIRED", alt: "Short haired cat", style: true }, { image: "/semi-long-haired.PNG", text: "SEMI LONG HAIRED", alt: "Semi Long Haired cat", style: true }, { image: "/long-haired.PNG", text: "LONG HAIRED", alt: "Long Haired cat", style: true }, { image: "/hairless.PNG", text: "HAIRLESS", alt: "Hairless cat", style: true }, { image: "/question-mark-cat.PNG", text: "ANY LENGTH", alt: "Open to any hair length for a cat", style: true }]
     },
     {
         title: 'Grooming', description: `How much time would you like to spend grooming your cat? Fluffy cats require more grooming`,

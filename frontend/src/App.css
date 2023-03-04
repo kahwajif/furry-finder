@@ -12,6 +12,10 @@ html {
   scroll-behavior: smooth
 }
 
+* {
+  scroll-margin-top: 56px;
+}
+
 .page {
   min-height: 65vh;
 }

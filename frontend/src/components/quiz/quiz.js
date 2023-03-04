@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { useParams } from "react-router-dom";
 import { catQuestions } from "./questions";
 import { dogQuestions } from "./questions";
 import './quiz.css'
 
 function Quiz() {
-    // for some reason react displays the page in the middle of the screen
+    useLayoutEffect(() => {
+        const element = document.getElementById('quiz-card');
+        element.scrollIntoView({ behavior: 'smooth' });
+    })
+
     //quiz animal styling
     const dogStyling = useParams().animal === "dog" ? true : false;
 
@@ -58,23 +62,35 @@ function Quiz() {
         }
 
     };
-
+    //for option question
     const handleOptionClick = (e) => {
         const allElements = document.querySelectorAll('*');
-        allElements.forEach((element) => {
-            element.classList.remove('cat-title');
-        });
-        e.currentTarget.previousSibling.classList.add('cat-title');
-    };
+        if (!dogStyling) {
+            allElements.forEach((element) => {
+                element.classList.remove('cat-title');
+                element.classList.remove('cat-border');
+            });
+            e.currentTarget.previousSibling.classList.add('cat-title');
+            e.currentTarget.firstChild.classList.add('cat-border');
+        } else {
+            allElements.forEach((element) => {
+                element.classList.remove('dog-title');
+                element.classList.remove('dog-border');
+            });
+            e.currentTarget.previousSibling.classList.add('dog-title');
+            e.currentTarget.classList.add('dog-border');
+        }
 
+    };
+    //for range question
     const handleOptionChange = (e, optionText) => {
         let frontCard = document.getElementById("front");
-        frontCard.classList.add("gelatine");
+        frontCard.classList.add("gelatin");
         setTimeout(() => {
             setOptionImage(questions[currentQuestion].options[e.target.value].image)
         }, 500);
         setTimeout(() => {
-            frontCard.classList.remove("gelatine");
+            frontCard.classList.remove("gelatin");
         }, 1000);
         setOptionValue(e.target.value);
     };
@@ -86,7 +102,6 @@ function Quiz() {
         let sliderLength = questions[currentQuestion].options.length - 1;
         let option = questions[currentQuestion].options[optionValue];
 
-
         optionsArray =
             (
                 <div className="col mt-4">
@@ -97,15 +112,16 @@ function Quiz() {
                         </div>
                     </div>
                     <br></br>
-                    <input type="range" className="custom-range" value={optionValue} min="0" max={sliderLength} id="customRange" onChange={e => handleOptionChange(e, option.text)}></input>
+                    <input type="range" className="range" value={optionValue} min="0" max={sliderLength} id="customRange" onChange={e => handleOptionChange(e, option.text)}></input>
                 </div>
             );
 
     } else {
         optionsArray = questions[currentQuestion].options.map((option) => {
             return (
-                <div className="col mt-4" key={option.text}>
+                <div className="col-sm mt-4" key={option.text}>
                     <h4 className={`mb-3`}>{option.text}</h4>
+                    {/* make it more abstract to work with both cats and dogs */}
                     <button className={`question-img ${option.style ? "button-color" : ""}`} onClick={e => handleOptionClick(e)}><img src={option.image} alt={option.alt} /></button>
                 </div>
 
@@ -117,7 +133,7 @@ function Quiz() {
     return (
         <>
             <div className="page container" style={{ marginTop: "250px" }}>
-                <div className={`${dogStyling ? "dog-style" : "cat-style"} card d-flex my-auto`}>
+                <div className={`${dogStyling ? "dog-style" : "cat-style"} card d-flex my-auto`} id="quiz-card">
                     <div className="card-body mt-3">
                         <span>Question {currentQuestion + 1}/{questions.length}</span>
                         <h5 className="card-title">{questions[currentQuestion].title}</h5>

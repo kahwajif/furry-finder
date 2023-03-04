@@ -1,3 +1,7 @@
+h4 {
+    white-space: nowrap;
+}
+
 .card {
     color: white;
     background-color: var(--dark);
@@ -48,6 +52,16 @@
 }
 
 /* question mark image START*/
+@media only screen and (max-width: 900px) {
+
+    .question-img,
+    .question-img>img {
+        max-width: 150px !important;
+    }
+
+}
+
+
 .question-img,
 .question-img>img {
     display: inline-block;
@@ -66,14 +80,21 @@
 }
 
 .button-color img {
-    border: 2px solid var(--blue);
+    border: 2px solid white;
     padding-right: 5px;
 }
 
 .question-img img:hover {
     transform: scale(1.1);
     border: 2px solid var(--blue);
-    /* border: 2px solid rgba(255, 255, 255, 0.35) !important; */
+}
+
+.question-img:focus {
+    transform: scale(1.1);
+    outline: none;
+    /* border: none; */
+    /* border: 2px solid var(--blue); */
+
 }
 
 /* question mark image END*/
@@ -84,36 +105,11 @@
     backface-visibility: hidden;
 }
 
-/* .spacing {
-    min-height: 20rem;
-} */
-
-/* .card-side {
-    top: 100%;
-    left: 39%;
-    transition: all 0.8s ease;
-    backface-visibility: hidden;
-    position: absolute;
+.gelatin {
+    animation: gelatin 1s infinite;
 }
 
-.card-side.back {
-    transform: rotateY(-180deg);
-}
-
-.col-card:hover .card-side.front {
-    transform: rotateY(180deg);
-}
-
-.col-card:hover .card-side.back {
-    transform: rotateY(0deg);
-} */
-
-
-.gelatine {
-    animation: gelatine 1s infinite;
-}
-
-@keyframes gelatine {
+@keyframes gelatin {
 
     from,
     to {
@@ -142,7 +138,13 @@
     color: var(--blue);
 }
 
-.custom-range {
+.cat-border {
+    border: 2px solid var(--blue) !important;
+
+}
+
+
+.range {
     margin-top: 5% !important;
     width: 50% !important;
 }
