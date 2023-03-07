@@ -13,7 +13,7 @@ function NavBar() {
     // }
 
     return (
-        <nav className={`navbar navbar-expand-lg navbar-dark bg-dark fixed-top`}>
+        <nav className={`navbar navbar-expand-lg navbar-dark bg-dark fixed-top`} id="nav">
             <div className="d-flex flex-grow-1">
                 <span className="w-100 d-lg-none d-block"></span>
                 <Link to={"/"} className="navbar-brand">Pet-Finder.net</Link>

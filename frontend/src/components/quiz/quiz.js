@@ -6,8 +6,14 @@ import './quiz.css'
 
 function Quiz() {
     useLayoutEffect(() => {
-        const element = document.getElementById('quiz-card');
-        element.scrollIntoView({ behavior: 'smooth' });
+        //auto scroll to top of question card
+        const element = document.getElementById('nav');
+        const navHeight = document.getElementById('quiz-card');
+        element.scrollIntoView(true);
+        var scrolledY = window.scrollY;
+        if (scrolledY) {
+            window.scroll(0, scrolledY - navHeight);
+        }
     })
 
     //quiz animal styling
@@ -132,11 +138,14 @@ function Quiz() {
 
     return (
         <>
-            <div className="page container" style={{ marginTop: "250px" }}>
-                <div className={`${dogStyling ? "dog-style" : "cat-style"} card d-flex my-auto`} id="quiz-card">
+            <div className="page container" style={{ marginTop: "150px" }}>
+                <div className={`${dogStyling ? "dog-style" : "cat-style"} card`} id="quiz-card">
                     <div className="card-body mt-3">
-                        <span>Question {currentQuestion + 1}/{questions.length}</span>
-                        <h5 className="card-title">{questions[currentQuestion].title}</h5>
+                        <div className="text-left ml-4">
+                            <span>Question</span>
+                            <h3 className="card-title">{currentQuestion + 1}/{questions.length}</h3>
+                        </div>
+                        <h2 className="card-title">{questions[currentQuestion].title}</h2>
                         <p className="card-text">{questions[currentQuestion].description}</p>
                         <div className="row">{optionsArray}</div>
                         <br></br>

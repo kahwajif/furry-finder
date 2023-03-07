@@ -90,11 +90,7 @@ h4 {
 }
 
 .question-img:focus {
-    transform: scale(1.1);
     outline: none;
-    /* border: none; */
-    /* border: 2px solid var(--blue); */
-
 }
 
 /* question mark image END*/
@@ -105,6 +101,7 @@ h4 {
     backface-visibility: hidden;
 }
 
+/* gelatin animation used for range selection */
 .gelatin {
     animation: gelatin 1s infinite;
 }
@@ -145,7 +142,7 @@ h4 {
 
 
 .range {
-    margin-top: 5% !important;
+    margin-top: 1rem !important;
     width: 50% !important;
 }
 
