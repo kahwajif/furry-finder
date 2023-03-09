@@ -4,22 +4,18 @@ import { catQuestions } from "./questions";
 import { dogQuestions } from "./questions";
 import './quiz.css'
 
+
+//import the styling conditionally,and adjust the style class names below.
 function Quiz() {
     useLayoutEffect(() => {
         //auto scroll to top of question card
-        const element = document.getElementById('nav');
-        const navHeight = document.getElementById('quiz-card');
-        element.scrollIntoView(true);
-        var scrolledY = window.scrollY;
-        if (scrolledY) {
-            window.scroll(0, scrolledY - navHeight);
-        }
-    })
+        // const navHeight = document.getElementById('nav');
+        const element = document.getElementById('quiz-card');
+        element.scrollIntoView({ behavior: 'smooth' });
+    }, [])
 
     //quiz animal styling
     const dogStyling = useParams().animal === "dog" ? true : false;
-
-    // for shedding, if they dont want any hair for cats, maybe show the censored cat/blurred out
 
     const questions = dogStyling ? dogQuestions : catQuestions;
 
@@ -28,48 +24,87 @@ function Quiz() {
     const [backBtnVisible, setbackBtnVisible] = useState(false);
 
     //range option value
-    const [optionValue, setOptionValue] = useState(0);
-    const [optionImage, setOptionImage] = useState(questions[currentQuestion].options[0].image);
+    const [optionRangeValue, setOptionRangeValue] = useState(0);
+    const [optionCardValue, setOptionCardValue] = useState(0);
+    const [optionRangeImage, setOptionRangeImage] = useState(questions[currentQuestion].options[0].image);
+
+    //answers
+    const [quizAnswers, setQuizAnswers] = useState([
+        { question: 0, answer: null },
+        { question: 1, answer: null },
+        { question: 2, answer: null },
+        { question: 3, answer: null },
+        { question: 4, answer: null },
+    ]);
+    // console.log("quizAnswers: ", quizAnswers)
 
     //handle next and back buttons
     const handleNextClick = () => {
+        //save answers
+        let updatedAnswers = [...quizAnswers]
+        updatedAnswers[currentQuestion].answer = questions[currentQuestion].optionsType ? optionRangeValue : optionCardValue;
+        setQuizAnswers(updatedAnswers);
 
         const nextQuestion = currentQuestion + 1;
-        setOptionImage(questions[nextQuestion].options[0].image)
-        setOptionValue(0)
+
+        //back button visibility
         if (nextQuestion === 0) {
             setbackBtnVisible(false);
         } else {
             setbackBtnVisible(true);
         }
+
+        //next question logic
         if (nextQuestion < questions.length) {
             setCurrentQuestion(nextQuestion);
+            setOptionRangeImage(questions[nextQuestion].options[0].image)
+            setOptionRangeValue(0)
+
+            //scroll to top of question
+            const element = document.getElementById('quiz-card');
+            element.scrollIntoView({ behavior: 'smooth' });
         } else {
             //show results
+            console.log("DONE!")
+            console.log(quizAnswers)
         }
-
     };
 
     const handleBackClick = () => {
 
         const nextQuestion = currentQuestion - 1;
-        setOptionImage(questions[nextQuestion].options[0].image)
-        setOptionValue(0)
+        //back button visibility
         if (nextQuestion === 0) {
             setbackBtnVisible(false);
         } else {
             setbackBtnVisible(true);
         }
 
+        //back button logic
         if (nextQuestion > -1) {
+            //set range image to match the saved answer
+            setOptionRangeImage(questions[nextQuestion].optionsType ? questions[nextQuestion].options[quizAnswers[nextQuestion].answer].image : questions[nextQuestion].options[0].image)
+            //set range option to saved answer
+            if (questions[nextQuestion].optionsType) {
+                setOptionRangeValue(quizAnswers[nextQuestion].answer);
+            } else {
+                setOptionCardValue(quizAnswers[nextQuestion].answer)
+            }
+
+
             setCurrentQuestion(nextQuestion);
+            //scroll to top of question
+            const element = document.getElementById('quiz-card');
+            element.scrollIntoView({ behavior: 'smooth' });
         } else {
             //show results
         }
 
     };
+
     //for option question
-    const handleOptionClick = (e) => {
+    const handleOptionCardClick = (e, index) => {
+
         const allElements = document.querySelectorAll('*');
         if (!dogStyling) {
             allElements.forEach((element) => {
@@ -86,49 +121,51 @@ function Quiz() {
             e.currentTarget.previousSibling.classList.add('dog-title');
             e.currentTarget.classList.add('dog-border');
         }
-
+        setOptionCardValue(index);
     };
     //for range question
-    const handleOptionChange = (e, optionText) => {
+    const handleOptionRangeChange = (e, optionText) => {
         let frontCard = document.getElementById("front");
         frontCard.classList.add("gelatin");
         setTimeout(() => {
-            setOptionImage(questions[currentQuestion].options[e.target.value].image)
+            setOptionRangeImage(questions[currentQuestion].options[e.target.value].image)
         }, 500);
         setTimeout(() => {
             frontCard.classList.remove("gelatin");
         }, 1000);
-        setOptionValue(e.target.value);
+        setOptionRangeValue(parseInt(e.target.value));
     };
 
-    //maybe a measure tape with a cat standing on two feet for "sizes"
     var optionsArray = [];
     // create and style the options
+    //range question
     if (questions[currentQuestion].optionsType === "slider") {
         let sliderLength = questions[currentQuestion].options.length - 1;
-        let option = questions[currentQuestion].options[optionValue];
+        let option = questions[currentQuestion].options[optionRangeValue];
 
         optionsArray =
             (
                 <div className="col mt-4">
                     <div className="col-card">
-                        <h4 className="form-label">{option.text}</h4>
+                        <h4 className={`form-label`}>{option.text}</h4>
                         <div className="card-side" id="front">
-                            <img id={option.text} className={`range-image ${dogStyling ? "dog-range-img" : "cat-range-img"}`} src={optionImage} alt={option.alt} />
+                            <img id={option.text} className={`range-image ${dogStyling ? "dog-range-img" : "cat-range-img"}`} src={optionRangeImage} alt={option.alt} />
                         </div>
                     </div>
                     <br></br>
-                    <input type="range" className="range" value={optionValue} min="0" max={sliderLength} id="customRange" onChange={e => handleOptionChange(e, option.text)}></input>
+                    <input type="range" className="range" value={optionRangeValue} min="0" max={sliderLength} id="customRange" onChange={e => handleOptionRangeChange(e, option.text)}></input>
                 </div>
             );
 
-    } else {
-        optionsArray = questions[currentQuestion].options.map((option) => {
+    } else {//card option question
+        optionsArray = questions[currentQuestion].options.map((option, index) => {
             return (
                 <div className="col-sm mt-4" key={option.text}>
-                    <h4 className={`mb-3`}>{option.text}</h4>
+                    <h4 className={`mb-3 ${quizAnswers[currentQuestion].answer === index ? "cat-title" : ""}`}>{option.text}</h4>
                     {/* make it more abstract to work with both cats and dogs */}
-                    <button className={`question-img ${option.style ? "button-color" : ""}`} onClick={e => handleOptionClick(e)}><img src={option.image} alt={option.alt} /></button>
+                    <button className={`question-img ${option.style ? "button-color" : ""}`} onClick={e => handleOptionCardClick(e, index)}>
+                        <img className={`${quizAnswers[currentQuestion].answer === index ? "cat-border" : ""}`} src={option.image} alt={option.alt} />
+                    </button>
                 </div>
 
             );

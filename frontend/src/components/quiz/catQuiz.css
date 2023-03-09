@@ -9,12 +9,11 @@ h4 {
     min-height: 25rem;
 }
 
-/* cat styling */
-.cat-style .card-title {
+.style .card-title {
     color: var(--blue)
 }
 
-.cat-style .btn-outline {
+.style .btn-outline {
     font-weight: 400;
     text-align: center;
     white-space: nowrap;
@@ -25,31 +24,11 @@ h4 {
     transition: ease-in-out .15s;
 }
 
-.cat-style .btn-outline:hover {
+.style .btn-outline:hover {
     background-color: var(--blue);
     color: white;
 }
 
-/* dog styling */
-.dog-style .card-title {
-    color: var(--orange)
-}
-
-.dog-style .btn-outline {
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    border: 1px solid var(--orange);
-    background-color: transparent;
-    color: var(--orange);
-    transition: ease-in-out .15s;
-}
-
-.dog-style .btn-outline:hover {
-    background-color: var(--orange);
-    color: white;
-}
 
 /* question mark image START*/
 @media only screen and (max-width: 900px) {
@@ -126,16 +105,16 @@ h4 {
     }
 }
 
-.cat-range-img {
+.range-img {
     border: 2px solid var(--blue);
 }
 
 /* range stuff END */
-.cat-title {
+.title {
     color: var(--blue);
 }
 
-.cat-border {
+.border {
     border: 2px solid var(--blue) !important;
 }
 

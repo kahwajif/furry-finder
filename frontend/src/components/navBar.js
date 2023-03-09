@@ -16,7 +16,8 @@ function NavBar() {
         <nav className={`navbar navbar-expand-lg navbar-dark bg-dark fixed-top`} id="nav">
             <div className="d-flex flex-grow-1">
                 <span className="w-100 d-lg-none d-block"></span>
-                <Link to={"/"} className="navbar-brand">Pet-Finder.net</Link>
+
+                <a href="/" className="navbar-brand">Pet-Finder.net</a>
                 <div className="w-100 text-right">
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar7">
                         <span className="navbar-toggler-icon"></span>

@@ -16,18 +16,13 @@ export const catQuestions = [
     {
         title: 'Playfulness',
         description: `How active are you looking for your cat to be? Some cats are always ready to play, while others are more relaxed and laid-back. Think about how much time you have to play with your cat each day, and if you have other family members or other pets who can join in on the fun.`,
-        options: [{ image: "/grooming-0.png", text: "LOW", alt: "Low level of playfullness in a cat preferred" }, { image: "/grooming-1.png", text: "MEDIUM", alt: "Medium level of playfullness in a cat preferred" }, { image: "/grooming-2.png", text: "HIGH", alt: "High level of playfullness in a cat preferred" }, { image: "/question-mark-cat.PNG", text: "ANY AMOUNT", alt: "Any amount of playfullness in a cat preferred" }],
+        options: [{ image: "/active-low.png", text: "LOW", alt: "Low level of playfullness in a cat preferred" }, { image: "/active-medium.png", text: "MEDIUM", alt: "Medium level of playfullness in a cat preferred" }, { image: "/active-high.png", text: "HIGH", alt: "High level of playfullness in a cat preferred" }, { image: "/question-mark-cat.PNG", text: "ANY AMOUNT", alt: "Any amount of playfullness in a cat preferred" }],
         optionsType: "slider"
     },
     {
         title: 'Vocalization',
         description: `How "talkative" would you like your cat to be? Do you prefer your cat to be vocal when it wants attention? Or do you prefer the silent type?`,
-        images: ["/Mocha.PNG", "/Mocha.PNG"]
-    },
-    {
-        title: 'Affection',
-        description: `Some cats bond closely to one person and are indifferent towards everyone else, and some others shower the family with love affection. How affectionate would you like your cat to be?`,
-        images: ["/Mocha.PNG", "/Mocha.PNG"]
+        options: [{ image: "/talkative-no.png", text: "NON-VOCAL", alt: "A non-talkative cat preferred", style: true }, { image: "/talkative-yes.png", text: "VOCAL", alt: "A talkatative cat preferred", style: true }],
     },
 ];
 
