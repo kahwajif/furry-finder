@@ -9,11 +9,11 @@ h4 {
     min-height: 25rem;
 }
 
-.style .card-title {
+.dog-style .card-title {
     color: var(--orange)
 }
 
-.style .btn-outline {
+.dog-style .btn-outline {
     font-weight: 400;
     text-align: center;
     white-space: nowrap;
@@ -24,7 +24,7 @@ h4 {
     transition: ease-in-out .15s;
 }
 
-.style .btn-outline:hover {
+.dog-style .btn-outline:hover {
     background-color: var(--orange);
     color: white;
 }
@@ -54,16 +54,12 @@ h4 {
     transition: transform .2s;
 }
 
-.button-color {
-    /* border: 2px solid var(--orange); */
-}
-
 .button-color img {
     border: 2px solid white;
     padding-right: 5px;
 }
 
-.question-img img:hover {
+.dog-style .question-img img:hover {
     transform: scale(1.1);
     border: 2px solid var(--orange);
 }
@@ -105,16 +101,13 @@ h4 {
     }
 }
 
-.range-img {
-    border: 2px solid var(--orange);
-}
 
 /* range stuff END */
-.title {
-    color: var(--blue);
+.dog-style .title {
+    color: var(--orange);
 }
 
-.border {
+.dog-style .border {
     border: 2px solid var(--orange) !important;
 }
 
@@ -124,6 +117,7 @@ h4 {
     width: 50% !important;
 }
 
-.range-image {
+.dog-style .range-image {
+    border: 2px solid var(--orange);
     max-width: 200px;
 }

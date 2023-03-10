@@ -2,10 +2,10 @@ import React, { useState, useLayoutEffect } from "react";
 import { useParams } from "react-router-dom";
 import { catQuestions } from "./questions";
 import { dogQuestions } from "./questions";
-import './quiz.css'
+import './catQuiz.css'
+import './dogQuiz.css'
 
-
-//import the styling conditionally,and adjust the style class names below.
+//import the styling conditionally,and adjust the style class names below. 
 function Quiz() {
     useLayoutEffect(() => {
         //auto scroll to top of question card
@@ -14,7 +14,7 @@ function Quiz() {
         element.scrollIntoView({ behavior: 'smooth' });
     }, [])
 
-    //quiz animal styling
+    //quiz animal styling depending on animal type
     const dogStyling = useParams().animal === "dog" ? true : false;
 
     const questions = dogStyling ? dogQuestions : catQuestions;
@@ -106,21 +106,14 @@ function Quiz() {
     const handleOptionCardClick = (e, index) => {
 
         const allElements = document.querySelectorAll('*');
-        if (!dogStyling) {
-            allElements.forEach((element) => {
-                element.classList.remove('cat-title');
-                element.classList.remove('cat-border');
-            });
-            e.currentTarget.previousSibling.classList.add('cat-title');
-            e.currentTarget.firstChild.classList.add('cat-border');
-        } else {
-            allElements.forEach((element) => {
-                element.classList.remove('dog-title');
-                element.classList.remove('dog-border');
-            });
-            e.currentTarget.previousSibling.classList.add('dog-title');
-            e.currentTarget.classList.add('dog-border');
-        }
+
+        allElements.forEach((element) => {
+            element.classList.remove('title');
+            element.classList.remove('border');
+        });
+        e.currentTarget.previousSibling.classList.add('title');
+        e.currentTarget.firstChild.classList.add('border');
+
         setOptionCardValue(index);
     };
     //for range question
@@ -149,7 +142,7 @@ function Quiz() {
                     <div className="col-card">
                         <h4 className={`form-label`}>{option.text}</h4>
                         <div className="card-side" id="front">
-                            <img id={option.text} className={`range-image ${dogStyling ? "dog-range-img" : "cat-range-img"}`} src={optionRangeImage} alt={option.alt} />
+                            <img id={option.text} className={`range-image`} src={optionRangeImage} alt={option.alt} />
                         </div>
                     </div>
                     <br></br>
@@ -161,10 +154,10 @@ function Quiz() {
         optionsArray = questions[currentQuestion].options.map((option, index) => {
             return (
                 <div className="col-sm mt-4" key={option.text}>
-                    <h4 className={`mb-3 ${quizAnswers[currentQuestion].answer === index ? "cat-title" : ""}`}>{option.text}</h4>
+                    <h4 className={`mb-3 ${quizAnswers[currentQuestion].answer === index ? "title" : ""}`}>{option.text}</h4>
                     {/* make it more abstract to work with both cats and dogs */}
                     <button className={`question-img ${option.style ? "button-color" : ""}`} onClick={e => handleOptionCardClick(e, index)}>
-                        <img className={`${quizAnswers[currentQuestion].answer === index ? "cat-border" : ""}`} src={option.image} alt={option.alt} />
+                        <img className={`${quizAnswers[currentQuestion].answer === index ? "border" : ""}`} src={option.image} alt={option.alt} />
                     </button>
                 </div>
 
