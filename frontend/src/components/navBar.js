@@ -25,7 +25,7 @@ function NavBar() {
                 </div>
             </div>
             <div className="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
-                <ul className="navbar-nav ml-auto flex-nowrap">
+                <ul className="navbar-nav ml-auto flex-nowrap mr-3">
                     <li className="nav-item">
                         <a href="/" className="nav-link">Home</a>
                     </li>

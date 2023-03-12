@@ -9,7 +9,7 @@ function Footer() {
             <div className="footer-middle">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-3 col-sm-6">
+                        <div className="col">
 
                             <div className="footer-pad">
                                 <h4>Features</h4>
@@ -21,7 +21,7 @@ function Footer() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-md-3 col-sm-6">
+                        <div className="col">
 
                             <div className="footer-pad">
                                 <h4>Pet Finder</h4>
@@ -32,7 +32,7 @@ function Footer() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-md-3 col-sm-6">
+                        <div className="col">
                             <div className="footer-pad">
                                 <h4>Contact Us</h4>
                                 <ul className="list-unstyled">
@@ -41,7 +41,7 @@ function Footer() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-md-3">
+                        <div className="col mb-3">
                             <h4>Follow Us</h4>
                             <ul className="social-network">
                                 <li><a href="/" title="Discord"><FontAwesomeIcon icon={faDiscord} size="xl" /></a></li>
