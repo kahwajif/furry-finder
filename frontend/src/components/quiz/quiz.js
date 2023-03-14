@@ -1,4 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { catQuestions } from "./questions";
 import { dogQuestions } from "./questions";
@@ -18,16 +19,16 @@ function Quiz() {
     const dogStyling = useParams().animal === "dog" ? true : false;
 
     const questions = dogStyling ? dogQuestions : catQuestions;
-
+    const animalLink = dogStyling ? "dog-breeds" : "cat-breeds";
     //quiz buttons
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [backBtnVisible, setbackBtnVisible] = useState(false);
 
-    //range option value
-    const [optionRangeValue, setOptionRangeValue] = useState(0);
-    const [optionCardValue, setOptionCardValue] = useState(0);
-    const [optionRangeImage, setOptionRangeImage] = useState(questions[currentQuestion].options[0].image);
+    //option user clicked/answered
+    const [optionValue, setOptionValue] = useState(0);
 
+    //State for next/submit button. If on last question, Submit button becomes a link
+    const [nextOrSubmitValue, setNextOrSubmitValue] = useState(0);
     //answers
     const [quizAnswers, setQuizAnswers] = useState([
         { question: 0, answer: null },
@@ -39,38 +40,42 @@ function Quiz() {
     // console.log("quizAnswers: ", quizAnswers)
 
     //handle next and back buttons
-    const handleNextClick = () => {
-        //save answers
-        let updatedAnswers = [...quizAnswers]
-        updatedAnswers[currentQuestion].answer = questions[currentQuestion].optionsType ? optionRangeValue : optionCardValue;
-        setQuizAnswers(updatedAnswers);
-
-        const nextQuestion = currentQuestion + 1;
-
-        //back button visibility
-        if (nextQuestion === 0) {
-            setbackBtnVisible(false);
+    const handleNextClick = (e) => {
+        const btnClicked = document.getElementsByClassName("btn-clicked");
+        if (!btnClicked.length) {
+            alert("NO BUTTON CLICKED")
         } else {
-            setbackBtnVisible(true);
+            //save answers
+            let updatedAnswers = [...quizAnswers]
+            updatedAnswers[currentQuestion].answer = optionValue;
+            setQuizAnswers(updatedAnswers);
+
+            const nextQuestion = currentQuestion + 1;
+
+            //back button visibility
+            if (nextQuestion === 0) {
+                setbackBtnVisible(false);
+            } else {
+                setbackBtnVisible(true);
+            }
+
+            //next question logic
+            if (nextQuestion < questions.length) {
+                //change next button JSX
+                if (nextQuestion === questions.length - 1) {
+                    setNextOrSubmitValue(1);
+                }
+                setCurrentQuestion(nextQuestion);
+                setOptionValue(quizAnswers[nextQuestion].answer !== null ? quizAnswers[nextQuestion].answer : 0);
+                //scroll to top of question
+                const element = document.getElementById('quiz-card');
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
-        //next question logic
-        if (nextQuestion < questions.length) {
-            setCurrentQuestion(nextQuestion);
-            setOptionRangeImage(questions[nextQuestion].options[0].image)
-            setOptionRangeValue(0)
-
-            //scroll to top of question
-            const element = document.getElementById('quiz-card');
-            element.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            //show results
-            console.log("DONE!")
-            console.log(quizAnswers)
-        }
     };
 
-    const handleBackClick = () => {
+    const handleBackClick = (e) => {
 
         const nextQuestion = currentQuestion - 1;
         //back button visibility
@@ -82,16 +87,10 @@ function Quiz() {
 
         //back button logic
         if (nextQuestion > -1) {
-            //set range image to match the saved answer
-            setOptionRangeImage(questions[nextQuestion].optionsType ? questions[nextQuestion].options[quizAnswers[nextQuestion].answer].image : questions[nextQuestion].options[0].image)
-            //set range option to saved answer
-            if (questions[nextQuestion].optionsType) {
-                setOptionRangeValue(quizAnswers[nextQuestion].answer);
-            } else {
-                setOptionCardValue(quizAnswers[nextQuestion].answer)
-            }
+            //change next button JSX
+            setNextOrSubmitValue(0);
 
-
+            setOptionValue(quizAnswers[nextQuestion].answer);
             setCurrentQuestion(nextQuestion);
             //scroll to top of question
             const element = document.getElementById('quiz-card');
@@ -102,69 +101,28 @@ function Quiz() {
 
     };
 
-    //for option question
-    const handleOptionCardClick = (e, index) => {
-
+    const handleOptionClick = (e, index) => {
         const allElements = document.querySelectorAll('*');
-
         allElements.forEach((element) => {
-            element.classList.remove('title');
-            element.classList.remove('border');
+            element.classList.remove('btn-clicked');
         });
-        e.currentTarget.previousSibling.classList.add('title');
-        e.currentTarget.firstChild.classList.add('border');
-
-        setOptionCardValue(index);
-    };
-    //for range question
-    const handleOptionRangeChange = (e, optionText) => {
-        let frontCard = document.getElementById("front");
-        frontCard.classList.add("gelatin");
-        setTimeout(() => {
-            setOptionRangeImage(questions[currentQuestion].options[e.target.value].image)
-        }, 500);
-        setTimeout(() => {
-            frontCard.classList.remove("gelatin");
-        }, 1000);
-        setOptionRangeValue(parseInt(e.target.value));
+        e.currentTarget.classList.add('btn-clicked');
+        setOptionValue(index);
     };
 
-    var optionsArray = [];
-    // create and style the options
-    //range question
-    if (questions[currentQuestion].optionsType === "slider") {
-        let sliderLength = questions[currentQuestion].options.length - 1;
-        let option = questions[currentQuestion].options[optionRangeValue];
+    const optionsArray = questions[currentQuestion].options.map((option, index) => {
+        return (
+            <div className="col-12 mt-4 d-flex justify-content-center" key={option.text}>
+                {/* make it more abstract to work with both cats and dogs */}
+                <button className={`options-button btn-animate ${quizAnswers[currentQuestion].answer === index ? "btn-clicked" : ""}`} onClick={e => handleOptionClick(e, index)}>
+                    {option.text}
+                </button>
+            </div>
+        );
+    });
 
-        optionsArray =
-            (
-                <div className="col mt-4">
-                    <div className="col-card">
-                        <h4 className={`form-label`}>{option.text}</h4>
-                        <div className="card-side" id="front">
-                            <img id={option.text} className={`range-image`} src={optionRangeImage} alt={option.alt} />
-                        </div>
-                    </div>
-                    <br></br>
-                    <input type="range" className="range" value={optionRangeValue} min="0" max={sliderLength} id="customRange" onChange={e => handleOptionRangeChange(e, option.text)}></input>
-                </div>
-            );
-
-    } else {//card option question
-        optionsArray = questions[currentQuestion].options.map((option, index) => {
-            return (
-                <div className="col-sm mt-4" key={option.text}>
-                    <h4 className={`mb-3 ${quizAnswers[currentQuestion].answer === index ? "title" : ""}`}>{option.text}</h4>
-                    {/* make it more abstract to work with both cats and dogs */}
-                    <button className={`question-img ${option.style ? "button-color" : ""}`} onClick={e => handleOptionCardClick(e, index)}>
-                        <img className={`${quizAnswers[currentQuestion].answer === index ? "border" : ""}`} src={option.image} alt={option.alt} />
-                    </button>
-                </div>
-
-            );
-        });
-    }
-
+    const nextOrSubmit = nextOrSubmitValue === 0 ?
+        (<button className="btn btn-outline" onClick={(e) => handleNextClick(e)}>Next</button>) : (<Link to={'/' + animalLink}> <button className="btn btn-outline" onClick={(e) => handleNextClick(e)}>Submit</button></Link>)
 
     return (
         <>
@@ -177,16 +135,18 @@ function Quiz() {
                         </div>
                         <h2 className="card-title">{questions[currentQuestion].title}</h2>
                         <p className="card-text">{questions[currentQuestion].description}</p>
+                        <img className={`range-image`} src={questions[currentQuestion].options[optionValue].image} alt={questions[currentQuestion].options[optionValue].alt} />
                         <div className="row">{optionsArray}</div>
                         <br></br>
                         <br></br>
                         <div className="row">
                             {backBtnVisible &&
                                 <div className="col">
-                                    <button className="btn btn-outline" onClick={() => handleBackClick()}>Back</button>
+                                    <button className="btn btn-outline" onClick={(e) => handleBackClick(e)}>Back</button>
                                 </div>}
                             <div className="col">
-                                <button className="btn btn-outline" onClick={() => handleNextClick()}>Next</button>
+
+                                {nextOrSubmit}
                             </div>
                         </div>
                     </div>

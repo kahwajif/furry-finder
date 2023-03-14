@@ -2,6 +2,10 @@ h4 {
     white-space: nowrap;
 }
 
+button {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .card {
     color: white;
     background-color: var(--dark);
@@ -14,14 +18,17 @@ h4 {
 }
 
 .cat-style .btn-outline {
-    font-weight: 400;
+    font-weight: 700;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    border: 1px solid var(--blue);
+    border: 2px solid var(--blue);
     background-color: transparent;
     color: var(--blue);
     transition: ease-in-out .15s;
+    width: 100%;
+    max-width: 200px;
+    text-transform: uppercase;
 }
 
 .cat-style .btn-outline:hover {
@@ -54,10 +61,10 @@ h4 {
     transition: transform .2s;
 }
 
-.button-color img {
+/* .button-color img {
     border: 2px solid white;
     padding-right: 5px;
-}
+} */
 
 .cat-style .question-img img:hover {
     transform: scale(1.1);
@@ -117,6 +124,44 @@ h4 {
 }
 
 .cat-style .range-image {
-    border: 2px solid var(--blue);
+    /* border: 2px solid var(--blue); */
     max-width: 200px;
+}
+
+.options-button {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 0.6em;
+    color: white;
+    cursor: pointer;
+    display: block;
+    align-self: center;
+    font-size: 1rem;
+    line-height: 1;
+    margin: 5px;
+    padding: 1em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    width: 80%;
+}
+
+.cat-style .options-button:hover,
+.cat-style.options-button:focus {
+    border: 2px solid var(--blue);
+    color: #fff;
+    outline: 0;
+}
+
+.btn-animate {
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.cat-style .btn-animate:hover,
+.cat-style .btn-clicked {
+    box-shadow: 0 0 50px 100px var(--blue) inset;
+    border: 2px solid var(--blue);
 }
