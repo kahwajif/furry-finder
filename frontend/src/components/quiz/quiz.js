@@ -6,7 +6,7 @@ import { dogQuestions } from "./questions";
 import './catQuiz.css'
 import './dogQuiz.css'
 
-//import the styling conditionally,and adjust the style class names below. 
+//change illustration for cat sizes. Instead of making the cat taller, make em longer horizonally
 function Quiz() {
     useLayoutEffect(() => {
         //auto scroll to top of question card
