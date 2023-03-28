@@ -22,17 +22,26 @@ export default class CatsDAO {
         page = 0,
         catsPerPage = 20,
     } = {}) {
-        let query
+        let query = {}
         if (filters) {
             if ("breed" in filters) {
-                query = { $text: { $search: filters["breed"] } };
-            } else if ("length" in filters) {
-                query = { "size.length": { $eq: filters["length"] } };
-            } else if ("coat_length" in filters) {
-                query = { "address.zipcode": { $eq: filters["zipcode"] } };
+                query["$text"] = { $search: filters["breed"] };
             }
-        }
+            if ("length" in filters) {
+                query["size.length"] = { $eq: filters["length"] };
+            }
+            if ("coat" in filters) {
+                query["coat"] = { $eq: filters["coat"] };
+            }
+            if ("origin" in filters) {
+                query["origin"] = { $eq: filters["origin"] }
+            }
+            if ("talkative" in filters) {
+                query["characteristics.talkative"] = { $eq: filters["talkative"] }
+            }
 
+        }
+        console.log(query)
         let cursor;
 
         try {
