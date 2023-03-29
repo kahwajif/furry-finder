@@ -47,8 +47,8 @@ function Features() {
                         <div className="position-relative">
                             <div className="icon-corner"><FontAwesomeIcon icon={faArrowRight} size="xl" /></div>
                             <div className="icon"><FontAwesomeIcon icon={faBowlFood} size="2xl" /></div>
-                            <h4>Food Recommendations</h4>
-                            <p>We recommend foods specific to your furry friend, and list reasons why they're beneficial</p>
+                            <h4>Blog</h4>
+                            <p>Read articles and posts about pet health, good practices, product recommendations, and other pet related news</p>
                         </div>
                     </div>
                 </div>

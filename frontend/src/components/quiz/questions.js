@@ -1,5 +1,9 @@
 export const catQuestions = [
     {
+        title: 'Ownership', description: `Are you a first time owner? If so, it is better to adopt a cat that is expected to be less maintenance and known to be very friendly. This is so new owners will not be overwhelmed after adopting.`,
+        options: [{ image: "/cat-first-owner.png", text: "First time cat owner", alt: "You are a first time cat owner" }, { image: "/cat-experienced-owner.PNG", text: "Experienced Cat Owner", alt: "You are an experienced cat owner", style: true }],
+        optionsType: "slider"
+    }, {
         title: 'Size', description: `Choose the size of your cat.`,
         options: [{ image: "/cat-size-small.png", text: "SMALL", alt: "Small sized cat" }, { image: "/cat-size-medium.png", text: "MEDIUM", alt: "Medium sized cat" }, { image: "/cat-size-large.png", text: "LARGE", alt: "Large sized cat" }, { image: "/question-mark-cat.PNG", text: "ANY SIZE", alt: "Open to any size cat", style: true }],
         optionsType: "slider"
@@ -10,7 +14,7 @@ export const catQuestions = [
     },
     {
         title: 'Grooming', description: `How much time would you like to spend grooming your cat? Fluffy cats require more grooming. You'll need to deal with some level of hair on your clothes and in your house. However, shedding varies depending on the breed.`,
-        options: [{ image: "/grooming-0.png", text: "NEVER", alt: "Never or barely groom the cat" }, { image: "/grooming-1.png", text: "ONCE PER WEEK", alt: "Groom the cat once per week" }, { image: "/grooming-2.png", text: "TWO TO THREE TIMES PER WEEK", alt: "Groom the cat twice to three times per week" }, { image: "/grooming-everyday.png", text: "EVERYDAY", alt: "Groom the cat every day" }],
+        options: [{ image: "/cat-groom-never.png", text: "NEVER", alt: "Never or barely groom the cat" }, { image: "/cat-groom-once.png", text: "ONCE PER WEEK", alt: "Groom the cat once per week" }, { image: "/cat-groom-twice.png", text: "TWO TO THREE TIMES PER WEEK", alt: "Groom the cat twice to three times per week" }, { image: "/cat-groom-everyday.png", text: "EVERYDAY", alt: "Groom the cat every day" }],
         optionsType: "slider"
     },
     {
@@ -22,7 +26,7 @@ export const catQuestions = [
     {
         title: 'Vocalization',
         description: `How "talkative" would you like your cat to be? Do you prefer your cat to be vocal when it wants attention? Or do you prefer the silent type?`,
-        options: [{ image: "/talkative-no.png", text: "NON-VOCAL", alt: "A non-talkative cat preferred", style: true }, { image: "/talkative-yes.png", text: "VOCAL", alt: "A talkatative cat preferred", style: true }],
+        options: [{ image: "/talkative-no.png", text: "LOW", alt: "A not as talkative cat preferred", style: true }, { image: "/talkative-yes.png", text: "MEDIUM", alt: "A moderately talkative cat preferred", style: true }, { image: "/talkative-yes.png", text: "HIGH", alt: "A talkatative cat preferred", style: true }],
     },
 ];
 

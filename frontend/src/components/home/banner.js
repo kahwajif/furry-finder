@@ -10,11 +10,13 @@ function Banner() {
                 <div className="row">
                     <div className="col-xl-6 col-md-12 my-auto text-left">
                         <h2>
-                            Looking for a new furry friend?
+                            Looking to adopt?
                         </h2>
                         <p className="my-3">
-                            Look no further! Our website will find the perfect match for your lifestyle and home.
-                            Take the quiz, and you'll find the <span>purr-fect</span> or <span> paw-some</span> companion for your family.
+                            Welcome to our pet website! We understand that finding the perfect pet can be overwhelming.
+                            That's why we created a quiz to help you find the best dog or cat for you.
+                            Our website also has helpful articles on pet care, training, and nutrition.
+                            Let us help you find your furry companion today!
                         </p>
                         <div className="mt-3 d-flex justify-content-center">
                             <a href="#choose-animal" className="btn-grad">Take the quiz!</a>

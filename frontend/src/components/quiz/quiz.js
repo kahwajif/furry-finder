@@ -9,10 +9,7 @@ import './dogQuiz.css'
 //change illustration for cat sizes. Instead of making the cat taller, make em longer horizonally
 function Quiz() {
     useLayoutEffect(() => {
-        //auto scroll to top of question card
-        // const navHeight = document.getElementById('nav');
-        const element = document.getElementById('quiz-card');
-        element.scrollIntoView({ behavior: 'smooth' });
+        scrollIntoView()
     }, [])
 
     //quiz animal styling depending on animal type
@@ -36,8 +33,11 @@ function Quiz() {
         { question: 2, answer: null },
         { question: 3, answer: null },
         { question: 4, answer: null },
+        { question: 5, answer: null },
     ]);
-    // console.log("quizAnswers: ", quizAnswers)
+    const scrollIntoView = () => {
+        window.scrollTo(0, 0)
+    }
 
     //handle next and back buttons
     const handleNextClick = (e) => {
@@ -68,8 +68,7 @@ function Quiz() {
                 setCurrentQuestion(nextQuestion);
                 setOptionValue(quizAnswers[nextQuestion].answer !== null ? quizAnswers[nextQuestion].answer : 0);
                 //scroll to top of question
-                const element = document.getElementById('quiz-card');
-                element.scrollIntoView({ behavior: 'smooth' });
+                scrollIntoView();
             }
         }
 
@@ -93,8 +92,7 @@ function Quiz() {
             setOptionValue(quizAnswers[nextQuestion].answer);
             setCurrentQuestion(nextQuestion);
             //scroll to top of question
-            const element = document.getElementById('quiz-card');
-            element.scrollIntoView({ behavior: 'smooth' });
+            scrollIntoView();
         } else {
             //show results
         }
@@ -122,11 +120,12 @@ function Quiz() {
     });
 
     const nextOrSubmit = nextOrSubmitValue === 0 ?
-        (<button className="btn btn-outline" onClick={(e) => handleNextClick(e)}>Next</button>) : (<Link to={'/' + animalLink}> <button className="btn btn-outline" onClick={(e) => handleNextClick(e)}>Submit</button></Link>)
+        (<button className="btn btn-outline" onClick={(e) => handleNextClick(e)}>Next</button>) :
+        (<Link to={'/' + animalLink} state={{ quizAnswers: quizAnswers, animalType: animalLink }}> <button className="btn btn-outline" onClick={(e) => handleNextClick(e)}>Submit</button></Link>)
 
     return (
         <>
-            <div className="page container" style={{ marginTop: "150px" }}>
+            <div className="page container" style={{ marginTop: "75px" }}>
                 <div className={`${dogStyling ? "dog-style" : "cat-style"} card`} id="quiz-card">
                     <div className="card-body mt-3">
                         <div className="text-left ml-4">
@@ -135,7 +134,7 @@ function Quiz() {
                         </div>
                         <h2 className="card-title">{questions[currentQuestion].title}</h2>
                         <p className="card-text">{questions[currentQuestion].description}</p>
-                        <img className={`range-image`} src={questions[currentQuestion].options[optionValue].image} alt={questions[currentQuestion].options[optionValue].alt} />
+                        <img className={`quiz-image`} src={questions[currentQuestion].options[optionValue].image} alt={questions[currentQuestion].options[optionValue].alt} />
                         <div className="row">{optionsArray}</div>
                         <br></br>
                         <br></br>

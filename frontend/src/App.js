@@ -15,7 +15,12 @@ function App() {
         <Route exact path="/" element={<Home />} className="mb-3" />
         <Route exact path="/quiz/:animal" element={<Quiz />} className="mb-3" />
         <Route exact path="/dog-breeds" element={<DogBreeds />} />
-        <Route exact path="/cat-breeds" element={<CatBreeds />} />
+
+        <Route
+          exact path="/cat-breeds"
+          element={<CatBreeds />}
+        />
+
         {/* This redirects the user to the homepage when a non-existing route is entered */}
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>

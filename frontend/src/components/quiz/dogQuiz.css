@@ -22,9 +22,9 @@ button {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    border: 2px solid var(--blue);
+    border: 2px solid var(--orange);
     background-color: transparent;
-    color: var(--blue);
+    color: var(--orange);
     transition: ease-in-out .15s;
     width: 100%;
     max-width: 200px;
@@ -37,7 +37,6 @@ button {
 }
 
 
-/* question mark image START*/
 @media only screen and (max-width: 900px) {
 
     .question-img,
@@ -47,6 +46,15 @@ button {
 
 }
 
+@media only screen and (max-width: 500px) {
+
+    .dog-style .quiz-image {
+        /* border: 2px solid var(--blue); */
+        max-height: 150px !important;
+        max-width: 250px;
+    }
+
+}
 
 .question-img,
 .question-img>img {
@@ -75,7 +83,6 @@ button {
     outline: none;
 }
 
-/* question mark image END*/
 /* card stuff START */
 .col-card {
     perspective: 50rem;
@@ -123,9 +130,9 @@ button {
     width: 50% !important;
 }
 
-.dog-style .range-image {
+.dog-style .quiz-image {
     /* border: 2px solid var(--orange); */
-    max-width: 200px;
+    max-height: 200px;
 }
 
 .options-button {
