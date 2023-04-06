@@ -7,6 +7,7 @@
     top: 0px;
     position: relative;
     max-width: 262px;
+    height: 250px !important;
     background-color: white;
     border-radius: 4px;
     padding: 0 0 0 0;
@@ -63,4 +64,10 @@
 
 .feature h4 {
     font-weight: 700;
+    white-space: normal;
+}
+
+#featured-services a {
+    color: black !important;
+    text-decoration: none;
 }

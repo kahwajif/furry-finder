@@ -1,7 +1,7 @@
 import React from "react";
 import './features.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBowlFood, faMagnifyingGlass, faImage, faStore, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faBowlFood, faMagnifyingGlass, faImage, faStore, faArrowRight, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 
 function Features() {
 
@@ -11,14 +11,16 @@ function Features() {
             <div className="container">
                 <h2 className="mb-3">Features</h2>
                 <div className="row align-items-center mx-auto justify-content-center">
-                    <div className="col-xl-3 col-md-6 feature">
-                        <div className="position-relative">
-                            <div className="icon-corner"><FontAwesomeIcon icon={faArrowRight} size="xl" /></div>
-                            <div className="icon"><FontAwesomeIcon icon={faMagnifyingGlass} size="2xl" /></div>
-                            <h4>Find Your Perfect<br></br>Pet</h4>
-                            <p>We can find your perfect pet after you finish a quiz by recommending specific breeds</p>
+                    <a href="#choose-animal">
+                        <div className="col-xl-3 col-md-6 feature">
+                            <div className="position-relative">
+                                <div className="icon-corner"><FontAwesomeIcon icon={faArrowRight} size="xl" /></div>
+                                <div className="icon"><FontAwesomeIcon icon={faMagnifyingGlass} size="2xl" /></div>
+                                <h4>Find Your Perfect<br></br>Pet</h4>
+                                <p>We can find your perfect pet after you finish a quiz by recommending specific breeds</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                     <div className="col-xl-3 col-md-6 feature">
                         <div className="position-relative">
                             <div className="icon-corner"><FontAwesomeIcon icon={faArrowRight} size="xl" /></div>
@@ -35,7 +37,7 @@ function Features() {
                             <p>Find the nearest adoption center with optional filters to find your perfect friend</p>
                         </div>
                     </div>
-                    <div className="col-xl-3 col-md-6 feature">
+                    <div className="col-xl-3 col-md-6 feature px-auto">
                         <div className="position-relative">
                             <div className="icon-corner"><FontAwesomeIcon icon={faArrowRight} size="xl" /></div>
                             <div className="icon"><FontAwesomeIcon icon={faBowlFood} size="2xl" /></div>
@@ -46,7 +48,7 @@ function Features() {
                     <div className="col-xl-3 col-md-6 feature">
                         <div className="position-relative">
                             <div className="icon-corner"><FontAwesomeIcon icon={faArrowRight} size="xl" /></div>
-                            <div className="icon"><FontAwesomeIcon icon={faBowlFood} size="2xl" /></div>
+                            <div className="icon"><FontAwesomeIcon icon={faNewspaper} size="2xl" /></div>
                             <h4>Blog</h4>
                             <p>Read articles and posts about pet health, good practices, product recommendations, and other pet related news</p>
                         </div>

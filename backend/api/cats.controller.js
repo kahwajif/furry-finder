@@ -15,11 +15,20 @@ export default class CatsController {
         if (req.query.coat) {
             filters.coat = req.query.coat;
         }
+        if (req.query.grooming) {
+            filters.grooming = req.query.grooming;
+        }
         if (req.query.origin) {
             filters.origin = req.query.origin;
         }
-        if (req.query.talkative) {
-            filters.talkative = req.query.talkative;
+        if (req.query.vocal) {
+            filters.vocal = req.query.vocal;
+        }
+        if (req.query.energy) {
+            filters.energy = req.query.energy;
+        }
+        if (req.query.first_time_owner) {
+            filters.first_time_owner = req.query.first_time_owner;
         }
 
         const { catsList, totalNumCats } = await CatsDAO.getCats({

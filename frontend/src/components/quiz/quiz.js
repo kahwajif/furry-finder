@@ -35,6 +35,7 @@ function Quiz() {
         { question: 4, answer: null },
         { question: 5, answer: null },
     ]);
+
     const scrollIntoView = () => {
         window.scrollTo(0, 0)
     }
@@ -100,6 +101,7 @@ function Quiz() {
     };
 
     const handleOptionClick = (e, index) => {
+
         const allElements = document.querySelectorAll('*');
         allElements.forEach((element) => {
             element.classList.remove('btn-clicked');
@@ -110,7 +112,7 @@ function Quiz() {
 
     const optionsArray = questions[currentQuestion].options.map((option, index) => {
         return (
-            <div className="col-12 mt-4 d-flex justify-content-center" key={option.text}>
+            <div className="col-12 mt-4 d-flex justify-content-center" key={option.alt}>
                 {/* make it more abstract to work with both cats and dogs */}
                 <button className={`options-button btn-animate ${quizAnswers[currentQuestion].answer === index ? "btn-clicked" : ""}`} onClick={e => handleOptionClick(e, index)}>
                     {option.text}

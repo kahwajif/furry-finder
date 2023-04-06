@@ -33,11 +33,20 @@ export default class CatsDAO {
             if ("coat" in filters) {
                 query["coat"] = { $eq: filters["coat"] };
             }
+            if ("grooming" in filters) {
+                query["characteristics.grooming"] = { $eq: filters["grooming"] }
+            }
             if ("origin" in filters) {
                 query["origin"] = { $eq: filters["origin"] }
             }
-            if ("talkative" in filters) {
-                query["characteristics.talkative"] = { $eq: filters["talkative"] }
+            if ("vocal" in filters) {
+                query["characteristics.vocal"] = { $eq: filters["vocal"] }
+            }
+            if ("energy" in filters) {
+                query["characteristics.energy"] = { $eq: filters["energy"] }
+            }
+            if ("first_time_owner" in filters) {
+                query["first_time_owner"] = { $eq: filters["first_time_owner"] === 'true' ? true : false }
             }
 
         }
@@ -46,6 +55,11 @@ export default class CatsDAO {
 
         try {
             cursor = await cats.find(query);
+            // cursor = await cats.updateMany(
+            //     {},
+            //     { $rename: { "characteristics.talkative": "characteristics.vocal" } }
+            // )
+
         } catch (e) {
             console.error(`Unable to issue find command, ${e}`);
             return { cats: [], totalNumCats: 0 };

@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 import CatsDataService from "../../services/cats";
 import { Link, useLocation } from "react-router-dom";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faHandDots } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./breeds.css"
 
-// Suitable for: Single people, families?? add to database
+
 function CatBreeds() {
     const [cats, setCats] = useState([]);
     const [searchBreed, setSearchBreed] = useState("");
-
-    var state = useLocation().state;
+    const [filters, setFilters] = useState({})
+    let state = useLocation().state;
 
     useEffect(() => {
         if (state !== null) {
-            retrieveQuizResults(state.quizAnswers, state.animalType)
+            retrieveQuizResults(state.quizAnswers)
         } else {
             retrieveCats();
         }
 
     }, [state]);
-
     const retrieveCats = () => {
         CatsDataService.getAll()
             .then(response => {
-                console.log(response.data);
+                console.log("getAll", response.data);
                 setCats(response.data.cats);
             })
             .catch(e => {
@@ -33,9 +32,10 @@ function CatBreeds() {
     };
 
     const retrieveQuizResults = (answers, type) => {
-        CatsDataService.getQuizResults(answers, type)
+        CatsDataService.getCatsByQuizResults(answers, type)
             .then(response => {
-                console.log(response.data);
+                console.log("getCatsByQuizResults", response.data);
+                setFilters(response.data.filters)
                 setCats(response.data.cats);
             })
             .catch(e => {
@@ -63,9 +63,54 @@ function CatBreeds() {
         find(searchBreed, "breed");
     };
 
+    const updateFilters = (e) => {
+        let filter = e.target.closest(".btn-dark").textContent.split(" ")[0];
+        let newFilters = filters;
+        delete newFilters[filter];
+        setFilters(newFilters)
+        populateFilters(newFilters)
+        CatsDataService.getCatsByFilters(newFilters)
+            .then(response => {
+                console.log("getCatsByFilters", response.data);
+                setCats(response.data.cats);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
+    const populateFilters = (filters) => {
+        // object destructuring 
+        const { first_time_owner, coat, energy, grooming, vocal, length } = filters;
+        const filtersText = [
+            first_time_owner ? "first_time_owner " : "",
+            coat ? "coat " + coat : "",
+            energy ? "energy " + energy : "",
+            grooming ? "grooming " + grooming : "",
+            vocal ? "vocal " + vocal : "",
+            length ? "length " + length : "",
+        ];
+
+        const populated = filtersText.map((text, index) => {
+            if (!text) {
+                return "";
+            }
+            return (
+                <div className="col filter-btn" key={index}>
+                    <button type="button" className="btn btn-dark">{text}&nbsp;
+                        <FontAwesomeIcon icon={faX} size="xs" onClick={e => updateFilters(e)} />
+                    </button>
+                </div>
+            )
+        });
+
+        return populated;
+    }
+
     return (
         <div className="page container mt-5">
             <h1 className="pt-3">CAT BREEDS</h1>
+            {/* Search by breed */}
             <div className="row mb-4">
                 <div className="input-group col-lg-12 mt-2">
                     <input
@@ -86,6 +131,12 @@ function CatBreeds() {
                     </div>
                 </div>
             </div>
+            {/* filters */}
+            <div className="row mb-4">
+                {filters ? populateFilters(filters) : <></>}
+            </div>
+
+            {/* cats results */}
             <div className="row">
                 {cats.map((cat, index) => {
                     // const legendIcons = `${cat.characteristics.hypoallergenic ? (<FontAwesomeIcon icon={faHandDots} />) : ""} ${cat.characteristics.kid_friendly ? "bruh" : ""}`;
