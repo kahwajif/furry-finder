@@ -45,8 +45,27 @@ function CatBreeds() {
 
     const onChangeSearchBreed = e => {
         const searchBreed = e.target.value;
+        const clearSearch = document.getElementById("clear-search");
+        if (searchBreed !== "") {
+            clearSearch.style.display = "block";
+        } else {
+            clearSearch.style.display = "none";
+        }
         setSearchBreed(searchBreed);
     };
+
+    const handleKeyDownSearchBreed = e => {
+        if (e.key === 'Enter') {
+            const searchBreed = e.target.value;
+            setSearchBreed(searchBreed);
+            findByBreed();
+        }
+    };
+
+    const onClearSearch = () => {
+        document.getElementById("clear-search").style.display = "none";;
+        setSearchBreed("");
+    }
 
     const find = (query, by) => {
         CatsDataService.find(query, by)
@@ -109,7 +128,7 @@ function CatBreeds() {
 
     return (
         <div className="page container mt-5">
-            <h1 className="pt-3">CAT BREEDS</h1>
+            <h1 className="page-title">CAT BREEDS</h1>
             {/* Search by breed */}
             <div className="row mb-4">
                 <div className="input-group col-lg-12 mt-2">
@@ -119,7 +138,11 @@ function CatBreeds() {
                         placeholder="Search by breed"
                         value={searchBreed}
                         onChange={onChangeSearchBreed}
+                        onKeyDown={handleKeyDownSearchBreed}
                     />
+                    <button type="button" className="btn bg-transparent" id="clear-search" style={{ marginLeft: "-38px", zIndex: 100, display: "none" }}>
+                        <FontAwesomeIcon icon={faX} onClick={e => onClearSearch()} />
+                    </button>
                     <div className="input-group-append">
                         <button
                             className="btn btn-outline-secondary"
@@ -135,7 +158,13 @@ function CatBreeds() {
             <div className="row mb-4">
                 {filters ? populateFilters(filters) : <></>}
             </div>
-
+            {!cats.length ?
+                <div className="mt-5">
+                    <img className="" id="not-found" src="/question-mark-cat.png" alt="cat not found" />
+                    <h2>
+                        <b>No results found</b>
+                    </h2>
+                </div> : ""}
             {/* cats results */}
             <div className="row">
                 {cats.map((cat, index) => {

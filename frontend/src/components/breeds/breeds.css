@@ -84,3 +84,17 @@
     transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
     background: linear-gradient(0deg, rgba(5, 69, 115, 0) 75%, var(--dark) 100%);
 }
+
+#not-found {
+    max-height: 250px;
+    filter: brightness(0%);
+}
+
+.page-title {
+    margin-top: 60px;
+    font-size: 70px;
+    font-weight: 600;
+    color: black;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
