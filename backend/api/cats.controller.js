@@ -46,4 +46,21 @@ export default class CatsController {
         }
         res.json(response);
     }
+
+    static async apiGetCatsById(req, res, next) {
+        try {
+            let id = req.params.id || {};
+            let cat = await CatsDAO.getCatByID(id);
+            if (!cat) {
+                res.status(404).json({ error: "Not Found" });
+                return;
+            }
+            console.log(cat)
+            res.json(cat);
+        } catch (e) {
+            console.log(`api, ${e}`);
+            res.status(500).json({ error: e });
+        }
+    }
+
 }

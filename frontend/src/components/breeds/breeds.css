@@ -1,3 +1,7 @@
+/* .breeds {
+    background-color: var(--dark);
+} */
+
 .card {
     border: none;
     transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -94,7 +98,6 @@
     margin-top: 60px;
     font-size: 70px;
     font-weight: 600;
-    color: black;
     background-clip: text;
     -webkit-background-clip: text;
 }

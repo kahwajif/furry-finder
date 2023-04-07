@@ -1,0 +1,81 @@
+#not-found {
+    max-height: 250px;
+    filter: brightness(0%);
+}
+
+.profile {
+    margin-top: 100px;
+    color: white;
+    background-color: var(--dark);
+    width: auto;
+    min-height: 25rem;
+    padding: 2rem 2rem 2rem 2rem;
+}
+
+.profile-title {
+    color: var(--blue)
+}
+
+.profile-main-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+.profile-stat-title {
+    color: var(--blue)
+}
+
+.profile>.col-md-auto,
+.profile>.col {
+    position: relative;
+}
+
+.borderLeft {
+    border-left: 1px solid var(--blue) !important;
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 0;
+}
+
+.borderRight {
+    border-right: 1px solid var(--blue) !important;
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 100%;
+}
+
+.borderBottom,
+.borderTop {
+    display: none;
+}
+
+@media only screen and (max-width: 766px) {
+    /* .col-md-auto {
+        border-top: 1px solid var(--blue);
+        border-bottom: 1px solid var(--blue);
+    } */
+
+    .borderBottom {
+        display: block;
+        background-color: var(--blue);
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .borderTop {
+        display: block;
+        background-color: var(--blue);
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .borderRight,
+    .borderLeft {
+        display: none;
+    }
+}

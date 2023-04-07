@@ -6,6 +6,7 @@ import Quiz from './components/quiz/quiz'
 import Footer from './components/footer';
 import DogBreeds from './components/breeds/dog_breeds';
 import CatBreeds from './components/breeds/cat_breeds';
+import AnimalProfile from './components/breeds/animal_profile';
 
 function App() {
   return (
@@ -15,7 +16,10 @@ function App() {
         <Route exact path="/" element={<Home />} className="mb-3" />
         <Route exact path="/quiz/:animal" element={<Quiz />} className="mb-3" />
         <Route exact path="/dog-breeds" element={<DogBreeds />} />
-
+        <Route
+          path="/cats/:id"
+          element={<AnimalProfile />}
+        />
         <Route
           exact path="/cat-breeds"
           element={<CatBreeds />}

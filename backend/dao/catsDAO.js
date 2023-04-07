@@ -79,4 +79,13 @@ export default class CatsDAO {
         }
     }
 
+    static async getCatByID(id) {
+        try {
+            return await cats.findOne({ _id: new ObjectId(id) });
+        } catch (e) {
+            console.error(`Something went wrong in getCatByID: ${e}`)
+            throw e
+        }
+    }
+
 }

@@ -20,6 +20,7 @@ function CatBreeds() {
         }
 
     }, [state]);
+
     const retrieveCats = () => {
         CatsDataService.getAll()
             .then(response => {
@@ -127,7 +128,7 @@ function CatBreeds() {
     }
 
     return (
-        <div className="page container mt-5">
+        <div className="page container mt-5 breeds">
             <h1 className="page-title">CAT BREEDS</h1>
             {/* Search by breed */}
             <div className="row mb-4">
@@ -145,7 +146,7 @@ function CatBreeds() {
                     </button>
                     <div className="input-group-append">
                         <button
-                            className="btn btn-outline-secondary"
+                            className="btn btn-outline-dark"
                             type="button"
                             onClick={findByBreed}
                         >
@@ -172,9 +173,9 @@ function CatBreeds() {
                     return (
 
                         <div className="col-sm-12 col-md-4 col-lg-3 mb-4" key={index}>
-                            <Link to={"/"}>
+                            <Link to={"/cats/" + cat._id}>
                                 <div className="card text-white card-has-bg click-col" style={{ backgroundImage: `url(/cats/${cat.image ? cat.image : "Mocha-cropped.png"})` }}>
-                                    <img className="card-img d-none" src={`/cats/${cat.image !== "" ? cat.image : "Mocha-cropped.png"}`} alt={cat.breed} />
+                                    <img className="card-img d-none" src={`/cats/${cat.image !== undefined ? cat.image : "Mocha-cropped.png"}`} alt={cat.breed} />
                                     <div className="card-img-overlay d-flex flex-column">
                                         <div className="card-body">
                                             {/* <h5 className="card-meta mb-0">{legendIcons}</h5> */}
@@ -190,8 +191,6 @@ function CatBreeds() {
 
                     );
                 })}
-
-
             </div>
         </div>
     );

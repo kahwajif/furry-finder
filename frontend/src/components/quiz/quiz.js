@@ -126,34 +126,32 @@ function Quiz() {
         (<Link to={'/' + animalLink} state={{ quizAnswers: quizAnswers, animalType: animalLink }}> <button className="btn btn-outline" onClick={(e) => handleNextClick(e)}>Submit</button></Link>)
 
     return (
-        <>
-            <div className="page container" style={{ marginTop: "75px" }}>
-                <div className={`${dogStyling ? "dog-style" : "cat-style"} card`} id="quiz-card">
-                    <div className="card-body mt-3">
-                        <div className="text-left ml-4">
-                            <span>Question</span>
-                            <h3 className="card-title">{currentQuestion + 1}/{questions.length}</h3>
-                        </div>
-                        <h2 className="card-title">{questions[currentQuestion].title}</h2>
-                        <p className="card-text">{questions[currentQuestion].description}</p>
-                        <img className={`quiz-image`} src={questions[currentQuestion].options[optionValue].image} alt={questions[currentQuestion].options[optionValue].alt} />
-                        <div className="row">{optionsArray}</div>
-                        <br></br>
-                        <br></br>
-                        <div className="row">
-                            {backBtnVisible &&
-                                <div className="col">
-                                    <button className="btn btn-outline" onClick={(e) => handleBackClick(e)}>Back</button>
-                                </div>}
+        <div className="page container" style={{ marginTop: "75px" }}>
+            <div className={`${dogStyling ? "dog-style" : "cat-style"} card`} id="quiz-card">
+                <div className="card-body mt-3">
+                    <div className="text-left ml-4">
+                        <span>Question</span>
+                        <h3 className="card-title">{currentQuestion + 1}/{questions.length}</h3>
+                    </div>
+                    <h2 className="card-title">{questions[currentQuestion].title}</h2>
+                    <p className="card-text">{questions[currentQuestion].description}</p>
+                    <img className={`quiz-image`} src={questions[currentQuestion].options[optionValue].image} alt={questions[currentQuestion].options[optionValue].alt} />
+                    <div className="row">{optionsArray}</div>
+                    <br></br>
+                    <br></br>
+                    <div className="row">
+                        {backBtnVisible &&
                             <div className="col">
+                                <button className="btn btn-outline" onClick={(e) => handleBackClick(e)}>Back</button>
+                            </div>}
+                        <div className="col">
 
-                                {nextOrSubmit}
-                            </div>
+                            {nextOrSubmit}
                         </div>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
